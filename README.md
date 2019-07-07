@@ -30,7 +30,7 @@ class User extends Model {
             fullname: {type: "string", notNull: true}
         } // <-- Columns of the table.
 
-        super(table, columns);
+        super(table, columns); // <-- Pass the table and columns into the parent class to register them.
     }
     ...
 }
