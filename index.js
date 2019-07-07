@@ -120,7 +120,7 @@ class Model {
      * DELETE method of the CRUD
      */
     delete() {
-
+        
     }
 
     /**

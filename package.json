@@ -27,5 +27,8 @@
     "index.js",
     "index.d.ts",
     "README.md"
-  ]
+  ],
+  "readme": {
+    "type": "string"
+  }
 }
