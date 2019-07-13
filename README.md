@@ -43,13 +43,76 @@ class User extends Model {
 - [update (async)](#update)
 - [delete (async)](#delete)
 
-### create
+### create (async)
+> create(hashmap={})
+
+**create** method helps to insert new data into the database. See example on how it is used below:
+```js
+const user = new User(); // <-- This is the User model we created earlier.
+const hashmap = {
+    id: 1,
+    username: "olayinkaokewale",
+    password: "914b9c17b4ea373bc4981bbf867df186",
+    fullname:"Olayinka Okewale"
+}; // <-- This is the javascript object to use in creating the model.
+user.create(hashmap)
+    .then(data => { // <-- Returns promise with insert ID
+        const insertId = data.insertId;
+    })
+    .catch(err => { // <-- Returns failed promise caught here.
+        console.log(err); // <-- Log the error.
+    });
+```
+
+### read (async)
+> read(selectData=[], whereHashmap={}, orderList=[], limit=0, offset=0)
+
+**read** method is used to get rows from the database. Note that this method uses the [whereHashMap](#wherehashmap) to build the query. Read more about it in [this section](#wherehashmap).
+
+See example below:
+
+ ```js
+ const selectData = ["username", "id"]; // <-- Columns to select
+ const whereHashmap = {
+    _and: {
+        username: "olayinkaokewale",
+        password: "914b9c17b4ea373bc4981bbf867df186"
+    }
+ } // <-- Where hashmap to search with.
+ const orderList = []; // <-- order list can be empty by default.
+ const limit = 10; // <-- limit is the parameter used to set the maximum number of rows to be returned.
+ const offset = 1; // <-- offset is used to set the starting position to start selecting data.
 
 
-### read
-
+user.read(selectData, whereHashmap, orderList, limit, offset)
+    .then(rows => { // <-- Promise returned rows of data. (Array)
+        // Use the rows selected here.
+    })
+    .catch(err => { // <-- Promise rejected caught here.
+        console.log(err); // <-- Always good to log error
+    });
+```
+Read more about [whereHashmap here](#wherehashmap)
 
 ### update
+> update(columnHashmap = {}, whereHashmap = {})
 
+**update** method requires two parameters but can take more to form more complicated queries. See the example below:
+
+```js
+const columnHashmap = {
+    fullname: "Okewale Olayinka",
+    username: "okjool"
+}; // <-- key:value columns hash to update
+const whereHashmap = {
+    _and: {
+        username: "olayinkaokewale",
+        password: "914b9c17b4ea373bc4981bbf867df186"
+    }
+}; // <-- where clause for update query.
+
+user.update(columnHashmap, whereHashmap);
+```
 
 ### delete
+Coming soon.
