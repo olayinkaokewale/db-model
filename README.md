@@ -116,3 +116,65 @@ user.update(columnHashmap, whereHashmap);
 
 ### delete
 Coming soon.
+
+## whereHashmap
+This is an object that helps build where query for the data you are trying to retrieve using the model.
+
+Below are the different use-cases:
+
+### AND
+SQL Query:
+```sql
+WHERE `username`='olayinkaokewale' AND `password`='914b9c17b4ea373bc4981bbf867df186'
+```
+DB-MODEL Equivalent:
+```js
+{
+    _and: {
+        username: "olayinkaokewale",
+        password: "914b9c17b4ea373bc4981bbf867df186"
+    }
+}
+```
+
+### OR
+SQL Query:
+```sql
+WHERE `username`='olayinkaokewale' OR `password`='914b9c17b4ea373bc4981bbf867df186'
+```
+DB-MODEL Equivalent:
+```js
+{
+    _or: {
+        username: "olayinkaokewale",
+        password: "914b9c17b4ea373bc4981bbf867df186"
+    }
+}
+```
+
+### AND & OR Combination
+The following use-cases show how AND & OR sql query can be used together.
+
+SQL Query
+```sql
+WHERE (`username`='olayinkaokewale' OR `password`='914b9c17b4ea373bc4981bbf867df186') AND (`fullname`='Olayinka Okewale' OR `id`='1')
+```
+
+DB-MODEL Equivalent:
+```js
+{
+    _and: {
+        _or: [
+            {
+                username: "olayinkaokewale",
+                password: "914b9c17b4ea373bc4981bbf867df186"
+            },
+            {
+                fullname: "Olayinka Okewale",
+                id: 1
+            }
+        ]
+        
+    }
+}
+```
